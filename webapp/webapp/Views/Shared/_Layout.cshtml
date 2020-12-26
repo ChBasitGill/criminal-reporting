@@ -54,8 +54,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link waves-effect" href="@Url.Action("Index", "Station")">
-                                    Criminal Reporting
+                                <a class="nav-link waves-effect" href="@Url.Action("Index", "Crime")">
+                                    Crime Reports
                                 </a>
                             </li>
                         </ul>
@@ -80,8 +80,8 @@
                     <a href="@Url.Action("Index", "Station")" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user mr-3"></i>Stations
                     </a>
-                    <a href="@Url.Action("Index", "Home")" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-table mr-3"></i>Criminal Reports
+                    <a href="@Url.Action("Index", "Crime")" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-table mr-3"></i>Crime Reports
                     </a>
                 </div>
 
@@ -112,8 +112,8 @@
         <!--/.Footer-->
     </div>
 
-  
-    
+
+
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -123,6 +123,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"></script>
     @*Datatables*@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+    <script src="~/Scripts/canvasjs.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

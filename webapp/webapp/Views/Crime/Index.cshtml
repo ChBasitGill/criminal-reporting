@@ -1,7 +1,7 @@
-﻿@model IEnumerable<criminal.reporting.models.Station>
+﻿@model IEnumerable<criminal.reporting.models.CrimeCase>
 
 @{
-    ViewBag.Title = "Station";
+    ViewBag.Title = "Crime Report";
 }
 
 <!-- Heading -->
@@ -13,7 +13,7 @@
         <h4 class="mb-2 mb-sm-0 pt-1">
             <a href="@Url.Action("Index", "Home")" target="_blank">Dashboard</a>
             <span>/</span>
-            <span>Station</span>
+            <span>Crime Report</span>
             @if (ViewBag.Success)
             {
                 <span style="color:Highlight">@ViewBag.Message</span>
@@ -38,9 +38,9 @@
             <!--Card content-->
             <div class="card-body">
                 <p>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createstation">Create New</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createcrime">Create New</button>
                 </p>
-                <table class="table table-hover stripe" id="stationtable">
+                <table class="table table-hover stripe" id="crimetable">
                     <!-- Table head -->
                     <thead class="blue-grey lighten-4">
                         <tr>
@@ -48,16 +48,25 @@
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Location)
+                                @Html.DisplayNameFor(model => model.Age)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.ContactInfo)
+                                @Html.DisplayNameFor(model => model.Gender)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.MailAddress)
+                                @Html.DisplayNameFor(model => model.Contact)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.StationBoundries)
+                                @Html.DisplayNameFor(model => model.CrimeInfo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateOfCrime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CaseImages)
                             </th>
                             <th>Actions</th>
                         </tr>
@@ -69,23 +78,42 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(model => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Location)
+                                    @Html.DisplayFor(model => item.Age)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ContactInfo)
+                                    @Html.DisplayFor(model => item.Gender)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.MailAddress)
+                                    @Html.DisplayFor(model => item.Contact)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.StationBoundries)
+                                    @Html.DisplayFor(model => item.CrimeInfo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.DateOfCrime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Address)
+                                </td>
+                                <td>
+                                    <div>
+                                        @if (item.CaseImages != null)
+                                        {
+                                            <img src="@item.CaseImages.Split(',').FirstOrDefault()" style="width:100px;height:100px" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/images/default.png" style="width:25px;height:25px" />
+                                        }
+                                    </div>
                                 </td>
                                 <td>
                                     <a class="fa fa-edit" onclick="edit(@item.Id)" aria-hidden="true"></a>
                                     <a class="fa fa-trash" onclick="remove(@item.Id)" aria-hidden="true"></a>
+                                    <a class="fa fa-eye" onclick="view(`@item.CaseImages`)" aria-hidden="true"></a>
                                 </td>
                             </tr>
                         }
@@ -103,20 +131,19 @@
 </div>
 <!--Grid row-->
 
-<div class="modal fade" id="createstation" tabindex="-1" role="dialog" aria-labelledby="createstation"
+<div class="modal fade" id="createcrime" tabindex="-1" role="dialog" aria-labelledby="createcrime"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Station</h5>
+                <h5 class="modal-title">Report Crime</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 @{
-                    Html.RenderPartial(@"~/Views/Station/Register.cshtml", new criminal.reporting.models.Station());
-
+                    Html.RenderPartial(@"~/Views/Crime/Register.cshtml", new criminal.reporting.models.CrimeCaseDto());
                 }
             </div>
 
@@ -128,7 +155,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Station</h5>
+                <h5 class="modal-title">Edit Crime Report</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,12 +167,41 @@
         </div>
     </div>
 </div>
+<!-- Central Modal Large Info-->
+<div class="modal fade" id="viewImage" tabindex="-1" role="dialog" aria-labelledby="viewImage"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Images</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Large Info-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
-            $('#stationtable').DataTable({
+            $('#crimetable').DataTable({
                 "paging": true,
                 "ordering": true,
                 "info": true
@@ -158,10 +214,11 @@
     function edit(id) {
         $.ajax({
         type: 'GET',
-        url: '@Url.Action("Edit", "Station")',
+        url: '@Url.Action("Edit", "Crime")',
         data: { id: id },
         cache: false,
-        success: function (result) {
+            success: function (result) {
+                debugger;
             // disable express option if delivery type is Electronic
             $('#editModal').find('.modal-body').html(result);
             $("#editModal").modal("show");
@@ -174,7 +231,7 @@
         if (r == true) {
         $.ajax({
         type: 'DELETE',
-        url: '@Url.Action("Delete", "Station")',
+        url: '@Url.Action("Delete", "Crime")',
         data: { id: id },
         cache: false,
             success: function () {
@@ -184,6 +241,21 @@
             }
         });
         }
+    }
+    function view(images) {
+        debugger;
+        var imageshtml="";
+        if (images != undefined) { 
+            var a =  images.split(',');
+            for (i in a) {
+                imageshtml +=  `<img src="`+a[i]+`" style="width:100%;height:100%" /></hr>`;
+            }
+        }
+        $('#viewImage').find('.modal-body').html(`
+                <div class="text-center">`+
+                imageshtml
+            +` </div>`);
+            $("#viewImage").modal("show");
     }
     </script>
 }

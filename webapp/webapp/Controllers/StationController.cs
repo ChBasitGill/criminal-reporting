@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace webapp.Controllers
 {
-  //  [Authorize]
+    [Authorize]
     public class StationController : Controller
     {
         private IRepository<Station> repository = null;
@@ -32,15 +32,15 @@ namespace webapp.Controllers
         {
             return PartialView("~/Views/Station/Edit.cshtml", repository.GetById(id));
         }
-        
+        [HttpDelete]
         public ActionResult Delete(int id)
         {
             repository.Delete(id);
-            TempData["Message"] = "";
+            repository.Save();
+            TempData["Message"] = "Deleted Successfully";
             TempData["Success"] = true;
             return RedirectToAction("Index");
         }
-
         [HttpPost]
         public ActionResult Create(Station station)
         {
