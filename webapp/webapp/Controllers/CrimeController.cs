@@ -23,6 +23,7 @@ namespace webapp.Controllers
         {
             ViewBag.Message = Convert.ToString(TempData["Message"]);
             ViewBag.Success = Convert.ToBoolean(TempData["Success"]);
+
             return View(repository.GetAll());
         }
         public ActionResult Register()
@@ -37,6 +38,24 @@ namespace webapp.Controllers
                 Gender = crime.Gender,
                 Date = crime.DateOfCrime,
                 Time= crime.DateOfCrime,
+                Address = crime.Address,
+                CaseImages = crime.CaseImages,
+                Age = crime.Age,
+                Contact = crime.Contact,
+                CrimeInfo = crime.CrimeInfo,
+                Name = crime.Name,
+                Id = crime.Id,
+            };
+            return PartialView("~/Views/Crime/Edit.cshtml", data);
+        }
+        public ActionResult Edit1(int id)
+        {
+            CrimeCase crime = repository.GetById(id);
+            var data = new CrimeCaseDto()
+            {
+                Gender = crime.Gender,
+                Date = crime.DateOfCrime,
+                Time = crime.DateOfCrime,
                 Address = crime.Address,
                 CaseImages = crime.CaseImages,
                 Age = crime.Age,

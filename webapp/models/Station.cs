@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace criminal.reporting.models
 {
@@ -20,5 +21,7 @@ namespace criminal.reporting.models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Station Boundries is required")]
         [Display(Name = "Station Boundries")]
         public string StationBoundries { get; set; }
+
+        public virtual ICollection<CrimeCase> Cases { get; set; }
     }
 }

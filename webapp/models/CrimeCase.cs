@@ -25,6 +25,9 @@ namespace criminal.reporting.models
         public string Contact{ get; set; }
         [Display(Name = "Case Images")]
         public string CaseImages{ get; set; }
+
+        public int StationId { get; set; }
+        public Station Station { get; set; }
     }
     public class CrimeCaseDto
     {
