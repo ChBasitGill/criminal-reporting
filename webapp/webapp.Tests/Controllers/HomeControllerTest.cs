@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using criminal.reporting.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using webapp;
 using webapp.Controllers;

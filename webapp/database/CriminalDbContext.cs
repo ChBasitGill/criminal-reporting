@@ -5,7 +5,7 @@ namespace criminal.reporting.database
 {
     public  class CriminalDbContext :DbContext
     {
-        public CriminalDbContext() : base()
+        public CriminalDbContext() : base("DefaultConnection")
         {
 
         }

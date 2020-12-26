@@ -1,44 +1,124 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Criminal Reporting</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css"
+          rel="stylesheet" />
+    <!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <div class="container-for-admin">
+        <!--Main Navigation-->
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light white ">
+                <div class="container-fluid">
+                    <!-- Brand -->
+                    @Html.ActionLink("Criminal Reporting", "Index", "Home", new { area = "" }, new { @class = "navbar-brand waves-effect blue-text" })
+
+                    <!-- Collapse -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Links -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <!-- Left -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link waves-effect" href="#">
+                                    Dashboard
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Stations", "Index", "Station", new { @class = "nav-link waves-effect" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Criminal Reporting", "Index", "Home", new { @class = "nav-link waves-effect" })
+                            </li>
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+
+                </div>
+            </nav>
+            <!-- Navbar -->
+            <!-- Sidebar -->
+            <div class="sidebar-fixed position-fixed" style="padding-top: 30px;">
+
+                <a class="logo-wrapper waves-effect m-3">
+                    <img src="~/Content/images/crimelogo.png" class="img-fluid" alt="" style="">
+                </a>
+
+                <div class="list-group list-group-flush mt-5">
+                    <a href="@Url.Action("Index", "Home")" class="list-group-item active waves-effect">
+                        <i class="fa fa-pie-chart mr-3"></i>Dashboard
+
+                    </a>
+                    <a href="@Url.Action("Index", "Station")" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-user mr-3"></i>Stations
+                    </a>
+                    <a href="@Url.Action("Index", "Home")" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-table mr-3"></i>Criminal Reports
+                    </a>
+                </div>
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <!-- Sidebar -->
+
+        </header>
+        <!--Main Navigation-->
+        <!--Main layout-->
+
+        <main class="pt-5 mx-lg-5">
+            <div class="container-fluid mt-5">
+                @RenderBody()
+
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </main>
+        <!--Main layout-->
+        <!--Footer-->
+        <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+            <hr class="my-4">
+            <!--Copyright-->
+            <div class="footer-copyright py-3">
+                <p>&copy; @DateTime.Now.Year - Criminal Reporting</p>
+            </div>
+            <!--/.Copyright-->
+
         </footer>
+        <!--/.Footer-->
     </div>
+
+  
+    
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @*MDB*@
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"></script>
+    @*Datatables*@
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

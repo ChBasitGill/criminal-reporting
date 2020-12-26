@@ -1,22 +1,24 @@
-﻿using System;
+﻿using criminal.reporting.database;
+using criminal.reporting.models;
+using criminal.reporting.repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace webapp.Controllers
+namespace criminal.reporting.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository<Station> repository = null;
+
+        public HomeController()
+        {
+            this.repository = new Repository<Station>();
+        }
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

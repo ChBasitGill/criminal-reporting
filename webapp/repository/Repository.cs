@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace criminal.reporting.repository
 {
-    public class IRepository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private CriminalDbContext _context = null;
         private DbSet<T> table = null;
-        public IRepository()
+        public Repository()
         {
             this._context = new CriminalDbContext();
             table = _context.Set<T>();
         }
-        public IRepository(CriminalDbContext _context)
+        public Repository(CriminalDbContext _context)
         {
             this._context = _context;
             table = _context.Set<T>();

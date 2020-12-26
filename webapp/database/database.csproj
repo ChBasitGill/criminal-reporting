@@ -52,6 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CriminalDbContext.cs" />
+    <Compile Include="Migrations\202012251937392_Initial.cs" />
+    <Compile Include="Migrations\202012251937392_Initial.designer.cs">
+      <DependentUpon>202012251937392_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012251957180_checks.cs" />
+    <Compile Include="Migrations\202012251957180_checks.designer.cs">
+      <DependentUpon>202012251957180_checks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +72,14 @@
       <Project>{AB6F4EB3-E988-4CA3-85DA-3E61B97C3840}</Project>
       <Name>models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012251937392_Initial.resx">
+      <DependentUpon>202012251937392_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012251957180_checks.resx">
+      <DependentUpon>202012251957180_checks.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
