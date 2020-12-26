@@ -49,10 +49,14 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Stations", "Index", "Station", new { @class = "nav-link waves-effect" })
+                                <a class="nav-link waves-effect" href="@Url.Action("Index", "Station")">
+                                    Stations
+                                </a>
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Criminal Reporting", "Index", "Home", new { @class = "nav-link waves-effect" })
+                                <a class="nav-link waves-effect" href="@Url.Action("Index", "Station")">
+                                    Criminal Reporting
+                                </a>
                             </li>
                         </ul>
                         @Html.Partial("_LoginPartial")
