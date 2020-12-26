@@ -63,6 +63,10 @@
     <Compile Include="Migrations\202012261221294_image path.Designer.cs">
       <DependentUpon>202012261221294_image path.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012261356194_cnic.cs" />
+    <Compile Include="Migrations\202012261356194_cnic.Designer.cs">
+      <DependentUpon>202012261356194_cnic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012261221294_image path.resx">
       <DependentUpon>202012261221294_image path.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261356194_cnic.resx">
+      <DependentUpon>202012261356194_cnic.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,9 @@
                                 @Html.DisplayNameFor(model => model.Age)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.CNIC)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Gender)
                             </th>
                             <th>
@@ -76,46 +79,49 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(model => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Age)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Gender)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Contact)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.CrimeInfo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.DateOfCrime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Address)
-                                </td>
-                                <td>
-                                    <div>
-                                        @if (item.CaseImages != null)
-                                        {
-                                            <img src="@item.CaseImages.Split(',').FirstOrDefault()" style="width:100px;height:100px" />
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Content/images/default.png" style="width:25px;height:25px" />
-                                        }
-                                    </div>
-                                </td>
-                                <td>
-                                    <a class="fa fa-edit" onclick="edit(@item.Id)" aria-hidden="true"></a>
-                                    <a class="fa fa-trash" onclick="remove(@item.Id)" aria-hidden="true"></a>
-                                    <a class="fa fa-eye" onclick="view(`@item.CaseImages`)" aria-hidden="true"></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.CNIC)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Contact)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.CrimeInfo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.DateOfCrime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Address)
+                            </td>
+                            <td>
+                                <div>
+                                    @if (item.CaseImages != null)
+                                    {
+                                        <img src="@item.CaseImages.Split(',').FirstOrDefault()" style="width:100px;height:100px" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/default.png" style="width:25px;height:25px" />
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <a class="fa fa-edit" onclick="edit(@item.Id)" aria-hidden="true"></a>
+                                <a class="fa fa-trash" onclick="remove(@item.Id)" aria-hidden="true"></a>
+                                <a class="fa fa-eye" onclick="view(`@item.CaseImages`)" aria-hidden="true"></a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
 
@@ -200,7 +206,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
+        $('#crimelink').addClass('active');
+        $('#dashboardlink').removeClass('active');
+        $('#stationlink').removeClass('active');
             $('#crimetable').DataTable({
                 "paging": true,
                 "ordering": true,

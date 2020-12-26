@@ -76,6 +76,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script>
     $(document).ready(function () {
+        $('#dashboardlink').addClass('active');
+        $('#stationlink').removeClass('active');
+        $('#crimelink').removeClass('active');
         lineChart();
         genderChart();
         bubbleChart();

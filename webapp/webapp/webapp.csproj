@@ -369,7 +369,6 @@
     <Content Include="Views\Crime\Edit.cshtml" />
     <Content Include="Views\Crime\Index.cshtml" />
     <Content Include="Views\Crime\Register.cshtml" />
-    <Content Include="Views\Crime\Edit1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

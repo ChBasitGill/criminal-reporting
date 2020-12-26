@@ -144,7 +144,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
+             $('#stationlink').addClass('active');
+        $('#dashboardlink').removeClass('active');
+        $('#crimelink').removeClass('active');
             $('#stationtable').DataTable({
                 "paging": true,
                 "ordering": true,

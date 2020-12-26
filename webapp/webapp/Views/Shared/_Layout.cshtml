@@ -45,7 +45,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link waves-effect" href="#">
                                     Dashboard
-                                    <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -73,14 +72,14 @@
                 </a>
 
                 <div class="list-group list-group-flush mt-5">
-                    <a href="@Url.Action("Index", "Home")" class="list-group-item active waves-effect">
+                    <a href="@Url.Action("Index", "Home")" class="list-group-item active waves-effect" id="dashboardlink">
                         <i class="fa fa-pie-chart mr-3"></i>Dashboard
 
                     </a>
-                    <a href="@Url.Action("Index", "Station")" class="list-group-item list-group-item-action waves-effect">
+                    <a href="@Url.Action("Index", "Station")" class="list-group-item list-group-item-action waves-effect" id="stationlink">
                         <i class="fa fa-user mr-3"></i>Stations
                     </a>
-                    <a href="@Url.Action("Index", "Crime")" class="list-group-item list-group-item-action waves-effect">
+                    <a href="@Url.Action("Index", "Crime")" class="list-group-item list-group-item-action waves-effect" id="crimelink">
                         <i class="fa fa-table mr-3"></i>Crime Reports
                     </a>
                 </div>

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,9 @@ namespace webapp.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string FullName { get; set; }
+        public string Contact { get; set; }
+        public string ServiceIdCard { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
