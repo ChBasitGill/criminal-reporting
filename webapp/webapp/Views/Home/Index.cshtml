@@ -2,7 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <!-- Heading -->
 <div class="card mb-4 wow fadeIn">
 
@@ -11,7 +10,7 @@
 
         <h4 class="mb-2 mb-sm-0 pt-1">
             <a href="@Url.Action("Index", "Home")" target="_blank">Dashboard</a>
-           @* <span>/</span>*@
+            @* <span>/</span>*@
             <span>@*Dashboard*@</span>
         </h4>
     </div>
@@ -53,141 +52,65 @@
 
     </div>
     <!--Grid column-->
-    <!--Grid column-->
-    <div class="col-md-12 mb-4">
-
-        <!--Card-->
-        <div class="card">
-
-            <!--Card content-->
-            <div class="card-body">
-                <div id="bubbleChart" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-            </div>
-
-        </div>
-        <!--/.Card-->
-
-    </div>
-    <!--Grid column-->
 </div>
 <!--Grid row-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
     $(document).ready(function () {
         $('#dashboardlink').addClass('active');
         $('#stationlink').removeClass('active');
         $('#crimelink').removeClass('active');
-        lineChart();
-        genderChart();
-        bubbleChart();
+        Chart();
     });
-    function genderChart() {
-        var chart = new CanvasJS.Chart("GenderChart", {
-	animationEnabled: true,
-	title: {
-		text: "Gender Crime Ratio"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 240,
-		yValueFormatString: "##0.00'%'",
-		indexLabel: "{label} {y}",
-		dataPoints: [
-			{y: 79, label: "Male"},
-			{y: 21, label: "Female"},
-		]
-	}]
-});
-chart.render();
-    }
-    function bubbleChart() {
-        var chart = new CanvasJS.Chart("bubbleChart", {
-	animationEnabled: true,
-	zoomEnabled: true,
-	theme: "light2",
-	title:{
-		text: "Employment in Agriculture Vs Agri-Land and Population"
-	},
-	axisX: {
-		title:"Employment - Agriculture",
-		suffix: "%",
-		minimum: 0,
-		maximum: 61,
-		gridThickness: 1
-	},
-	axisY:{
-		title: "Agricultural Land (million sq.km)",
-		suffix: "mn"
-	},
-	data: [{
-		type: "bubble",
-		toolTipContent: "<b>{name}</b><br/>Employment: {x}% <br/> Agri-Land: {y}mn sq. km<br/> Population: {z}mn",
-		dataPoints: [
-			{ x: 39.6, y: 5.225, z:1347, name:"China" },
-			{ x: 3.3, y: 4.17, z:21.49, name:"Australia" },
-			{ x: 1.5, y: 4.043, z:304.09, name:"US" },
-			{ x: 17.4, y: 2.647, z:2.64, name:"Brazil" },
-			{ x: 8.6, y: 2.154, z:141.95, name:"Russia" },
-			{ x: 52.98, y: 1.797, z:1190.86, name:"India" },
-			{ x: 4.3, y: 1.735, z:26.16, name:"Saudi Arabia" },
-			{ x: 1.21, y: 1.41, z:39.71, name:"Argentina" },
-			{ x: 5.7, y: .993, z:48.79, name:"SA" },
-			{ x: 13.1, y: 1.02, z:110.42, name:"Mexico" },
-			{ x: 2.4, y: .676, z:33.31, name:"Canada" },
-			{ x: 2.8, y: .293, z:64.37, name:"France" },
-			{ x: 3.8, y: .46, z:127.70, name:"Japan" },
-			{ x: 40.3, y: .52, z:234.95, name:"Indonesia" },
-			{ x: 42.3, y: .197, z:68.26, name:"Thailand" },
-			{ x: 31.6, y: .35, z:78.12, name:"Egypt" },
-			{ x: 1.1, y: .176, z:61.39, name:"U.K" },
-			{ x: 3.7, y: .144, z:59.83, name:"Italy" },
-			{ x: 1.8, y: .169, z:82.11, name:"Germany" }
-		]
-	}]
-});
-chart.render();
-    }
+    function Chart() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Chart", "Home")',
+            cache: false,
+            success: function (result) {
+                    var GenderChart = new CanvasJS.Chart("GenderChart", {
+                    animationEnabled: true,
+                    title: {
+                    text: "Gender Crime Ratio"
+                    },
+                    data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0",
+                    indexLabel: "{label} {y}",
+                    dataPoints: result.gender
+                    }]
+                    });
+                    GenderChart.render();
 
-    function lineChart() {
-        var chart = new CanvasJS.Chart("lineChart", {
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	animationEnabled: true,
-	title:{
-		text: "Share Value - 2016"   
-	},
-	axisX: {
-		interval: 1,
-		intervalType: "month",
-		valueFormatString: "MMM"
-	},
-	axisY:{
-		title: "Price (in USD)",
-		valueFormatString: "$#0"
-	},
-	data: [{        
-		type: "line",
-		markerSize: 12,
-		xValueFormatString: "MMM, YYYY",
-		yValueFormatString: "$###.#",
-		dataPoints: [        
-			{ x: new Date(2016, 00, 1), y: 61, indexLabel: "gain", markerType: "triangle",  markerColor: "#6B8E23" },
-			{ x: new Date(2016, 01, 1), y: 71, indexLabel: "gain", markerType: "triangle",  markerColor: "#6B8E23" },
-			{ x: new Date(2016, 02, 1) , y: 55, indexLabel: "loss", markerType: "cross", markerColor: "tomato" },
-			{ x: new Date(2016, 03, 1) , y: 50, indexLabel: "loss", markerType: "cross", markerColor: "tomato" },
-			{ x: new Date(2016, 04, 1) , y: 65, indexLabel: "gain", markerType: "triangle", markerColor: "#6B8E23" },
-			{ x: new Date(2016, 05, 1) , y: 85, indexLabel: "gain", markerType: "triangle", markerColor: "#6B8E23" },
-			{ x: new Date(2016, 06, 1) , y: 68, indexLabel: "loss", markerType: "cross", markerColor: "tomato" },
-			{ x: new Date(2016, 07, 1) , y: 28, indexLabel: "loss", markerType: "cross", markerColor: "tomato" },
-			{ x: new Date(2016, 08, 1) , y: 34, indexLabel: "gain", markerType: "triangle", markerColor: "#6B8E23" },
-			{ x: new Date(2016, 09, 1) , y: 24, indexLabel: "loss", markerType: "cross", markerColor: "tomato" },
-			{ x: new Date(2016, 10, 1) , y: 44, indexLabel: "gain", markerType: "triangle", markerColor: "#6B8E23" },
-			{ x: new Date(2016, 11, 1) , y: 34, indexLabel: "loss", markerType: "cross", markerColor: "tomato" }
-		]
-	}]
-});
-chart.render();
+                    var barchart = new CanvasJS.Chart("lineChart", {
+                    animationEnabled: true,
+
+                    title:{
+                    text:"Station Report"
+                    },
+                    axisX:{
+                    interval: 10
+                    },
+                    axisY2:{
+                    interlacedColor: "rgba(1,77,101,.2)",
+                    gridColor: "rgba(1,77,101,.1)",
+                    title: "Number of Cases"
+                    },
+                    data: [{
+                    type: "bar",
+                    name: "companies",
+                    axisYType: "secondary",
+                    color: "#014D65",
+                    dataPoints:result.line
+                    }]
+                    });
+                    barchart.render();
+            }
+        });
+
     }
-</script>
+    </script>
 }

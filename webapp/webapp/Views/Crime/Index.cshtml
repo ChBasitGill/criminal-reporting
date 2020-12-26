@@ -38,7 +38,12 @@
             <!--Card content-->
             <div class="card-body">
                 <p>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createcrime">Create New</button>
+                    @if (ViewBag.ShowCreate)
+                    {
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="create()">Create New</button>
+                    }else{
+                    <span style="color:crimson">Please Create Station</span>
+                    }
                 </p>
                 <table class="table table-hover stripe" id="crimetable">
                     <!-- Table head -->
@@ -136,24 +141,27 @@
     <!--Grid column-->
 </div>
 <!--Grid row-->
-
 <div class="modal fade" id="createcrime" tabindex="-1" role="dialog" aria-labelledby="createcrime"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
+        <!--Content-->
         <div class="modal-content">
+            <!--Header-->
             <div class="modal-header">
-                <h5 class="modal-title">Report Crime</h5>
+                <p class="heading lead">Report Crime</p>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
             </div>
+
+            <!--Body-->
             <div class="modal-body">
-                @{
-                    Html.RenderPartial(@"~/Views/Crime/Register.cshtml", new criminal.reporting.models.CrimeCaseDto());
-                }
+
             </div>
 
         </div>
+        <!--/.Content-->
     </div>
 </div>
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
@@ -219,7 +227,19 @@
                 alert('close');
             $("#editModal").modal("hide");
         });
-        });
+    });
+    function create() {
+        $.ajax({
+        type: 'GET',
+        url: '@Url.Action("Register", "Crime")',
+        cache: false,
+            success: function (result) {
+            // disable express option if delivery type is Electronic
+            $('#createcrime').find('.modal-body').html(result);
+            $("#createcrime").modal("show");
+        }
+    });
+    }
     function edit(id) {
         $.ajax({
         type: 'GET',

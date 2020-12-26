@@ -51,6 +51,7 @@ namespace criminal.reporting.models
         public string Contact { get; set; }
         [Display(Name = "Case Images")]
         public string CaseImages { get; set; }
+        public int StationId { get; set; }
         public IEnumerable<HttpPostedFileBase> ImageFile { get; set; }
     }
 }

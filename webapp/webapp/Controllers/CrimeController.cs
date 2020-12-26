@@ -13,22 +13,30 @@ namespace webapp.Controllers
     public class CrimeController : Controller
     {
         private IRepository<CrimeCase> repository = null;
+        private IRepository<Station> srepository = null;
 
         public CrimeController()
         {
             this.repository = new Repository<CrimeCase>();
+            this.srepository = new Repository<Station>();
         }
         // GET: Station
         public ActionResult Index()
         {
             ViewBag.Message = Convert.ToString(TempData["Message"]);
             ViewBag.Success = Convert.ToBoolean(TempData["Success"]);
+            var list= srepository.GetAll();
+            ViewBag.ShowCreate= (list.ToList().Count >0) ?true:false;
 
             return View(repository.GetAll());
         }
         public ActionResult Register()
         {
-            return PartialView("~/Views/Crime/Register.cshtml");
+            var model = new CrimeCaseDto();
+            ViewBag.Stations = new SelectList(srepository.GetAll(), "Id", "Name", model.StationId);
+            model.Date = DateTime.Now;
+            model.Time = DateTime.Now;
+            return PartialView(model);
         }
         public ActionResult Edit(int id)
         {
@@ -45,25 +53,10 @@ namespace webapp.Controllers
                 CrimeInfo = crime.CrimeInfo,
                 Name = crime.Name,
                 Id = crime.Id,
+                StationId = crime.StationId,
+                CNIC = crime.CNIC,
             };
-            return PartialView("~/Views/Crime/Edit.cshtml", data);
-        }
-        public ActionResult Edit1(int id)
-        {
-            CrimeCase crime = repository.GetById(id);
-            var data = new CrimeCaseDto()
-            {
-                Gender = crime.Gender,
-                Date = crime.DateOfCrime,
-                Time = crime.DateOfCrime,
-                Address = crime.Address,
-                CaseImages = crime.CaseImages,
-                Age = crime.Age,
-                Contact = crime.Contact,
-                CrimeInfo = crime.CrimeInfo,
-                Name = crime.Name,
-                Id = crime.Id,
-            };
+            ViewBag.Stations = new SelectList(srepository.GetAll(), "Id", "Name", crime.StationId);
             return PartialView("~/Views/Crime/Edit.cshtml", data);
         }
         [HttpDelete]
@@ -101,6 +94,8 @@ namespace webapp.Controllers
                     CrimeInfo = crime.CrimeInfo,
                     Name = crime.Name,
                     Id = crime.Id,
+                    StationId = crime.StationId,
+                    CNIC = crime.CNIC,
                 };
                 repository.Insert(data);
                 repository.Save();
@@ -142,6 +137,8 @@ namespace webapp.Controllers
                     CrimeInfo = crime.CrimeInfo,
                     Name = crime.Name,
                     Id = crime.Id,
+                    StationId = crime.StationId,
+                    CNIC = crime.CNIC,
                 };
                 repository.Update(data);
                 repository.Save();
