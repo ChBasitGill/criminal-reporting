@@ -20,15 +20,20 @@ namespace webapp.Controllers
             this.repository = new Repository<CrimeCase>();
             this.srepository = new Repository<Station>();
         }
-        // GET: Station
+        // GET: Crimes
         public ActionResult Index()
         {
             ViewBag.Message = Convert.ToString(TempData["Message"]);
             ViewBag.Success = Convert.ToBoolean(TempData["Success"]);
-            var list= srepository.GetAll();
+            var list = srepository.GetAll().ToList();
+            var crimes = repository.GetAll().ToList();
+            foreach (var item in crimes)
+            {
+                item.Station = list.Where(x => x.Id == item.StationId)?.FirstOrDefault();
+            }
             ViewBag.ShowCreate= (list.ToList().Count >0) ?true:false;
 
-            return View(repository.GetAll());
+            return View(crimes);
         }
         public ActionResult Register()
         {
