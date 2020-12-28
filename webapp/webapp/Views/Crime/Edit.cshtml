@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = null;
 }
 
 @using (Html.BeginForm("Edit", "Crime", FormMethod.Post,new { enctype = "multipart/form-data" }))
@@ -108,8 +109,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(document).ready(function () {
-    });
-    </script>
 }

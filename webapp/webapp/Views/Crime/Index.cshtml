@@ -40,7 +40,7 @@
                 <p>
                     @if (ViewBag.ShowCreate)
                     {
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" onclick="create()">Create New</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createcrime">Create New</button>
                     }else{
                     <span style="color:crimson">Please Create Station</span>
                     }
@@ -128,8 +128,8 @@
                                 </div>
                             </td>
                             <td>
-                                <a class="fa fa-edit" onclick="edit(@item.Id)" aria-hidden="true"></a>
-                                <a class="fa fa-trash" onclick="remove(@item.Id)" aria-hidden="true"></a>
+                                <a class="fa fa-edit"  data-toggle="modal" data-target="#editModal" onclick="edit(@item.Id)" aria-hidden="true"></a>
+                                <a class="fa fa-trash"  onclick="remove(@item.Id)" aria-hidden="true"></a>
                                 <a class="fa fa-eye" onclick="view(`@item.CaseImages`)" aria-hidden="true"></a>
                             </td>
                         </tr>
@@ -163,7 +163,9 @@
 
             <!--Body-->
             <div class="modal-body">
-
+                @{ 
+                    Html.RenderAction("Register", "Crime");
+                }
             </div>
 
         </div>
@@ -247,6 +249,7 @@
     });
     }
     function edit(id) {
+        
         $.ajax({
         type: 'GET',
         url: '@Url.Action("Edit", "Crime")',
@@ -254,9 +257,11 @@
         cache: false,
             success: function (result) {
                 debugger;
-            // disable express option if delivery type is Electronic
-            $('#editModal').find('.modal-body').html(result);
-            $("#editModal").modal("show");
+                $('#editModal').find('.modal-body').html(result);
+            //    $("#editModal").html(response);
+                $('#editModal').find('.modal-body').find('form').data('validator', null); 
+                $.validator.unobtrusive.parse($('#editModal').find('.modal-body').find('form'));
+
         }
     });
     }

@@ -62,7 +62,7 @@ namespace webapp.Controllers
                 CNIC = crime.CNIC,
             };
             ViewBag.Stations = new SelectList(srepository.GetAll(), "Id", "Name", crime.StationId);
-            return PartialView("~/Views/Crime/Edit.cshtml", data);
+            return PartialView(data);
         }
         [HttpDelete]
         public ActionResult Delete(int id)

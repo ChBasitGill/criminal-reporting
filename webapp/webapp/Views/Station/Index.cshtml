@@ -84,7 +84,7 @@
                                     @Html.DisplayFor(modelItem => item.StationBoundries)
                                 </td>
                                 <td>
-                                    <a class="fa fa-edit" onclick="edit(@item.Id)" aria-hidden="true"></a>
+                                    <a class="fa fa-edit" data-toggle="modal" data-target="#editModal" onclick="edit(@item.Id)" aria-hidden="true"></a>
                                     <a class="fa fa-trash" onclick="remove(@item.Id)" aria-hidden="true"></a>
                                 </td>
                             </tr>
@@ -159,15 +159,17 @@
         });
         });
     function edit(id) {
-        $.ajax({
+         $.ajax({
         type: 'GET',
         url: '@Url.Action("Edit", "Station")',
         data: { id: id },
         cache: false,
-        success: function (result) {
-            // disable express option if delivery type is Electronic
-            $('#editModal').find('.modal-body').html(result);
-            $("#editModal").modal("show");
+            success: function (result) {
+                $('#editModal').find('.modal-body').html(result);
+            //    $("#editModal").html(response);
+                $('#editModal').find('.modal-body').find('form').data('validator', null); 
+                $.validator.unobtrusive.parse($('#editModal').find('.modal-body').find('form'));
+
         }
     });
     }
