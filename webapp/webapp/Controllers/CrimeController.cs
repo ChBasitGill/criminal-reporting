@@ -44,7 +44,7 @@ namespace webapp.Controllers
             return PartialView(model);
         }
         public ActionResult Edit(int id)
-        {
+        { 
             CrimeCase crime = repository.GetById(id);
             var data = new CrimeCaseDto()
             {

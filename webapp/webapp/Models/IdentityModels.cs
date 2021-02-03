@@ -20,6 +20,7 @@ namespace webapp.Models
         public string FullName { get; set; }
         public string Contact { get; set; }
         public string ServiceIdCard { get; set; }
+        public string Secret { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

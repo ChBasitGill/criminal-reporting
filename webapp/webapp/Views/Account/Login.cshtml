@@ -2,77 +2,245 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = null;
 }
-<!-- Heading -->
-<div class="card mb-4 wow fadeIn">
+@*<!-- Heading -->
+    <div class="card mb-4 wow fadeIn">
 
-    <!--Card content-->
-    <div class="card-body d-sm-flex justify-content-between">
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
 
-        <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="@Url.Action("Index", "Home")" target="_blank">Dashboard</a>
-            <span>/</span>
-            <span>Login</span>
-        </h4>
+            <h4 class="mb-2 mb-sm-0 pt-1">
+                <a href="@Url.Action("Index", "Home")" target="_blank">Dashboard</a>
+                <span>/</span>
+                <span>Login</span>
+            </h4>
+        </div>
+
     </div>
+    <!-- Heading -->
 
-</div>
-<!-- Heading -->
+    <div class="row wow fadeIn">
 
-<div class="row wow fadeIn">
+        <!--Grid column-->
+        <div class="col-md-6 mb-6">
 
-    <!--Grid column-->
-    <div class="col-md-6 mb-6">
+            <!--Card-->
+            <div class="card">
 
-        <!--Card-->
-        <div class="card">
+                <!--Card content-->
+                <div class="card-body">
 
-            <!--Card content-->
-            <div class="card-body">
-
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Login</h4>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "control-label", @style = "padding-left: 25px;" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "control-label", @style = "padding-left: 25px;" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4>Login</h4>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label", @style = "padding-left: 25px;" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-primary" />
-                            @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "btn btn-default" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "control-label", @style = "padding-left: 25px;" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
-                }
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-primary" />
+                                @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    }
+
+                </div>
 
             </div>
+            <!--/.Card-->
 
         </div>
-        <!--/.Card-->
+        <!--Grid column-->
+    </div>*@
+<style>
+    *{
+  margin: 0px;
+  padding: 0px;
+}
 
+body{
+  background: #fff;
+  font-family: Arial;
+  font-size: 14px;
+}
+
+/*Our Header*/
+header{
+  background: #3a5795;
+  color: #fff;
+  padding: 15px 5px;
+}
+
+header h2{
+  font-size: 42px;
+}
+
+header .top{
+  width: 850px;
+  margin: 0px auto;
+}
+/*Link Properties*/
+a,a:hover,a:visited,a:active{
+  color: #3a5795;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+/*Button properties*/
+.btn{
+  padding: 3px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.btn-signup{
+  background: #6bb933;
+  border-color: #60a62e #519f18 #409701;
+}
+
+.btn-login{
+  width: 210px;
+  background: #3a5795; 
+  border: none;
+  padding: 8px;
+}
+
+/*Section*/
+section{
+  padding: 10px;
+  background: #e9eaed;
+}
+
+section .center{
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 500px;
+  margin: 100px auto;
+  font-size: 11px;
+}
+
+section h3{
+  font-size: 18px;
+  font-weight: lighter;
+  margin: 15px 0;
+}
+
+p{
+  margin: 2px 0;
+}
+input{
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+input.checkbox-style{
+  display: inline;
+  width:20px;
+}
+
+/* Footer Styles */
+footer{
+  font-size: 11px;
+}
+
+footer .bottom{
+  width: 850px;
+  margin: 0 auto;
+}
+
+footer p{
+  padding: 4px 0;
+}
+
+/*Table Style*/
+table{
+  border:none;
+}
+tr{
+  padding: 2px;
+}
+td{
+  width: 80px;
+} 
+</style>
+<header>
+    <div class="top">
+        <h2>facebook <button class="btn btn-signup">Sign Up</button></h2>
     </div>
-    <!--Grid column-->
-</div>
+</header>
+<section>
+    <div class="center">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h2>Log into Facebook</h2>
+            @Html.TextBoxFor(m => m.Email, new { @placeholder="Email or Phone Number" })
+            @Html.TextBoxFor(m => m.Password, new { @placeholder="Password" })
+            <button class="btn btn-login" type="submit">Log In</button>
+            <p><input type="checkbox" class="checkbox-style" />Keep me Logged in</p>
+            <p><a href="#">Forgot Password</a>.<a href="#">Sign up for facebook</a></p>
+        }
+    </div>
+</section>
+<footer>
+    <div class="bottom">
+        <p><a href="#">English(US)</a>,<a href="#"> more Languages</a></p>
+        <hr />
+        <table>
+            <tr>
+                <td><a href="#">Sign Up</a></td>
+                <td><a href="#">Log In</a></td>
+                <td><a href="#">Messenger</a></td>
+                <td><a href="#">More</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">Locations</a></td>
+                <td><a href="#">Celebrities</a></td>
+                <td><a href="#">About</a></td}>
+                <td><a href="#">More</a></td>
+            </tr>
+            <tr>
+                <td><a href="#">Help</a></td>
+            </tr>
+        </table>
+        <p><a href="#">More Links</a></p>
+        <p>Facebook &copy; 2016</p>
+    </div>
+</footer>
+
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

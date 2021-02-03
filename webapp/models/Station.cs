@@ -24,4 +24,13 @@ namespace criminal.reporting.models
 
         public virtual ICollection<CrimeCase> Cases { get; set; }
     }
+    public class LoginInfo
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string IpAddress{ get; set; }
+        public string BrowerInfo{ get; set; }
+    }
 }

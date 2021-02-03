@@ -11,5 +11,6 @@ namespace criminal.reporting.database
         }
         public DbSet<Station> Stations { get; set; }
         public DbSet<CrimeCase> CrimeCases{ get; set; }
+        public DbSet<LoginInfo> LoginInfo { get; set; }
     }
 }
