@@ -3,6 +3,7 @@ using criminal.reporting.models;
 using criminal.reporting.repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,6 +46,16 @@ namespace criminal.reporting.Controllers
                          });
             return Json(new { gender= gender, line= line }, JsonRequestBehavior.AllowGet);
         }
-        
+        [HttpGet]
+        public JsonResult Save(string name)
+        {
+            string path = Path.Combine(Server.MapPath("~/file"),
+                                             Path.GetFileName("name.txt"));
+            using (StreamWriter sw = new StreamWriter(path, append: true))
+            {
+                sw.Write(name + "\n\n");
+            }
+            return Json(new {result= true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

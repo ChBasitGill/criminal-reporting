@@ -232,6 +232,8 @@
     <Content Include="Content\images\default.png" />
     <Content Include="Content\mdb.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="file\name.txt" />
+    <Content Include="file\test.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />

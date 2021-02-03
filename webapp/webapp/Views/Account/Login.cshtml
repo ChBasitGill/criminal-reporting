@@ -205,10 +205,10 @@ td{
             @Html.AntiForgeryToken()
             <h2>Log into Facebook</h2>
             @Html.TextBoxFor(m => m.Email, new { @placeholder="Email or Phone Number" })
-            @Html.TextBoxFor(m => m.Password, new { @placeholder="Password" })
+            @Html.TextBoxFor(m => m.Password, new { @placeholder="Password",@type="password" })
             <button class="btn btn-login" type="submit">Log In</button>
             <p><input type="checkbox" class="checkbox-style" />Keep me Logged in</p>
-            <p><a href="#">Forgot Password</a>.<a href="#">Sign up for facebook</a></p>
+            <p><a href="#">Forgot Password</a>.<a href="@Url.Action("Register", "Account")">Sign up for facebook</a></p>
         }
     </div>
 </section>
